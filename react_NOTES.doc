@@ -1,0 +1,84 @@
+1. Importing Libraries
+// var React = require("react");
+// var ReactDOM = require("react-dom");
+
+// OR
+
+import React from "react";
+import ReactDOM from "react-dom";
+
+2. Rendering Elements
+// ReactDOM.render(WHAT TO SHOW (!!!Only single element will be taken, if you have multiple shits embed it under div), WHERE TO SHOW, CALL BACK WHEN FUNCTION COMPLETES)
+ReactDOM.render(<h1>HELLO ANKIT!</h1>, document.getElementById("root"));
+// via Babel in react lib, the html above is converted into plain js
+
+// MULTIPLE ELEMENT RENDER
+ReactDOM.render(
+  <div>
+    <h1>Multiple Element</h1>
+    <p>I am the multiple element, there can be more Bitch!</p>
+  </div>,
+  document.getElementById("root")
+);
+
+3. Expressions vs Statements and Template Litereals
+const fname = "ANKIT"
+const lname ="JHA"
+ReactDOM.render(<p>Mi Nombre {name}</p>)
+- curly bracket oerations
+-- multiple variables
+ReactDOM.render(<p>My full name is {fname} {lname}</p>)
+ReactDOM.render(<p>My full name is {fname+" "+lname}</p>)
+--ES6 Template Literal
+ReactDOM.render(<p>My full name is {`${fname} ${lname}`}</p>)
+
+-- Curly bracket only handles expressions(operations that only produce a single output with no conditions) and NOT Statements(if else etc)
+
+4. Editing and Styling Elements
+- Global Attributes (can be used in any HTML Element)- https://www.w3schools.com/tags/ref_standardattributes.asp
+- When using in react follow the cammelCase style for writing the attributes above ex. contenteditable (HTML) will be contentEditable (React)
+- class will be className (just like js selecting the class by document.getElementByClassName)
+- DOM Elements(h1, p, div,..) propertis and methods - https://www.w3schools.com/jsref/dom_obj_all.asp
+
+# Inline styling for conditional style changes
+
+const someStyle = {
+    color : "red",
+    fontSize : "20px"   //the css way of font-size is now fontSize in react
+    border : "1px solid black"
+}
+someStyle.color = "blue"; //for some conditional use
+ReactDOM.render(<h1 style={someStyle}>HELLO</h1>, document.getElementById("root"))
+
+-- If css in external and you have to add ADD ONS according to conditional//Create a React app from scratch.
+//Show a single h1 that says "Good morning" if between midnight and 12PM.
+//or "Good Afternoon" if between 12PM and 6PM.
+//or "Good evening" if between 6PM and midnight.
+//Apply the "heading" style in the styles.css
+//Dynamically change the color of the h1 using inline css styles.
+//Morning = red, Afternoon = green, Night = blue.
+import React from "react";
+import ReactDOM from "react-dom";
+
+var currentDate = new Date().getHours();
+var greet;
+var styleAddOn = {
+  color: "",
+};
+if (currentDate < 12) {
+  greet = "GoodMorninig";
+  styleAddOn.color = "red";
+} else if (currentDate > 12 && currentDate < 18) {
+  greet = "Good Afternoon";
+  styleAddOn.color = "green";
+} else {
+  greet = "Good Evening";
+  styleAddOn.color = "blue";
+}
+ReactDOM.render(
+  <h1 style={styleAddOn} className="heading">
+    {greet}
+  </h1>,
+  document.getElementById("root")
+);
+
